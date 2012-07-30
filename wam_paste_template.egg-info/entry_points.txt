@@ -1,0 +1,5 @@
+
+      # -*- Entry points: -*-
+      [paste.paster_create_template]
+      wam_cli = wam_paste_template:CLI_Template
+      

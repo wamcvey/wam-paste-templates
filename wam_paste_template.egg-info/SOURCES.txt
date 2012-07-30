@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+wam_paste_template/__init__.py
+wam_paste_template.egg-info/PKG-INFO
+wam_paste_template.egg-info/SOURCES.txt
+wam_paste_template.egg-info/dependency_links.txt
+wam_paste_template.egg-info/entry_points.txt
+wam_paste_template.egg-info/not-zip-safe
+wam_paste_template.egg-info/top_level.txt

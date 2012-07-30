@@ -1,0 +1,82 @@
+#!/usr/bin/env python
+
+"""${project}: ${synapsis}
+
+[ZZZ: Detailed documentation]
+"""
+
+__author__ = "William McVey <wam@cisco.com>"
+__date__ =   "30 July, 2012"
+
+
+import os
+import sys
+import logging
+
+class ${project}:
+    def __init__(self):
+        self.log = logging.getLogger(self.__class__.__name__)
+
+def setup_logging(debug=False, verbose=False, logfile=None)
+    """set up logging environment
+    """
+    root_log = logging.getLogger()
+    if debug:
+        root_log.setLevel(logging.DEBUG)
+    elif verbose:
+        root_log.setLevel(logging.INFO)
+    else:
+        root_log.setLevel(logging.WARN)
+    handler = logging.StreamHandler()
+    logformat = "%(name)s: %(levelname)s: %(message)s"
+    handler.setFormatter(logging.Formatter(logformat))
+    root_log.addHandler(handler)
+    if logfile:
+        logfile_handler = logging.FileHandler(logfile) 
+        logformat = "%(asctime)s %(levelname)s:%(name)s:%(message)s"
+        logfile_handler.setFormatter(logging.Formatter(logformat))
+        root_log.addHandler(logfile_handler)
+    return root_log
+
+def main(argv=sys.argv, Progname=None):
+    from optparse import OptionParser, SUPPRESS_HELP       # aka Optik
+
+    # set up commandline arguments
+    if not Progname:
+        Progname=os.path.basename(argv[0])
+    Usage="%prog usage: ${project}:[command_line_args]\n" \
+          "%prog usage: -h\n" \
+          "%prog usage: -V" 
+    optparser = OptionParser(usage=Usage, version="%prog: $$Id:$$" )
+    optparser.remove_option("--version")    # we add our own that knows -V
+    optparser.add_option("-V", "--version", action="version",
+      help="show program's version number and exit")
+    optparser.add_option("-d", "--debug", dest = "debug", 
+      action="store_true", help=SUPPRESS_HELP)
+    optparser.add_option("-v", "--verbose", dest = "verbose",
+      action="store_true", help="be verbose")
+    #optparser.add_option("-N", "--name", dest="var_n", 
+    # action= "store" | "append" | "store_true" | "store_false" 
+    # type = "int"
+    # default="foo", metavar="SOME_STRING", help="store a string")
+    (options, params) = optparser.parse_args(argv[1:])
+    setup_logging(options.debug, options.verbose, logfile=None)
+    log = logging.getLogger(Progname)
+
+    #if options.var_n:
+    #	# do something
+    
+    for param in params:
+        pass	# do something
+
+if __name__ == '__main__':
+    progname=os.path.basename(sys.argv[0])
+    try:
+        main()
+    except SystemExit, value:
+        sys.exit(value)
+    except:
+        (exc_type, exc_value, exc_tb) = sys.exc_info()
+        sys.excepthook(exc_type, exc_value, exc_tb)	# if debugging
+        sys.exit("%s: %s: %s" % (progname, exc_type.__name__, exc_value))
+    sys.exit(0)
