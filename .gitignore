@@ -1,0 +1,11 @@
+# edit artifacts
+.*.swp
+.swp
+
+# build artifacts
+*.egg-info
+build
+dist
+
+# run artifacts
+*.pyc
