@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.2.1'
+version = '0.2.2'
 
 setup(name='wam_paste_template',
       version=version,
@@ -17,8 +17,12 @@ setup(name='wam_paste_template',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
+      package_data = {
+      	'wam_paste_template':  ['*_templates/*'],
+      },
       install_requires=[
           # -*- Extra requirements: -*-
+	  "PasteScript",
       ],
       entry_points="""
       # -*- Entry points: -*-
